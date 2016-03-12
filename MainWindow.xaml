@@ -1,0 +1,81 @@
+﻿<Window x:Class="Kis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        Title="UDP Broadcast" Height="500" Width="700" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight"
+        Closed="MainWindow_OnClosed">
+    <Grid Margin="0,0,0,0" Height="470">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+            <StackPanel Margin="30,30,0,0" Orientation="Horizontal">
+                <Label Content="Interface" HorizontalAlignment="Center" VerticalAlignment="Top" Width="65" />
+                <ComboBox x:Name="ListenInterfaceBox" Width="150" IsEnabled="False" VerticalContentAlignment="Center">
+                    <ComboBoxItem IsSelected="True">not processed yet</ComboBoxItem>
+                </ComboBox>
+                <Label Content="Port" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <TextBox x:Name="PortBox" Height="23" Margin="0,2,0,0" TextWrapping="Wrap" Width="50" Text="777"
+                         HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top"
+                         ToolTip="Port number" KeyDown="PortBox_OnKeyDown" />
+                <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Center" Margin="20,3,0,0" Width="75"
+                        Height="23" VerticalAlignment="Top" Click="StartButton_OnClick" />
+                <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Center" Margin="5,3,0,0" Width="75"
+                        Height="23" VerticalAlignment="Top" Click="StopButton_OnClick" />
+            </StackPanel>
+            <StackPanel x:Name="StackPanel" Margin="27,0" Orientation="Vertical" VerticalAlignment="Top" Width="640"
+                        Height="400">
+                <StackPanel Margin="0,10,0,5" Orientation="Horizontal" Height="350">
+                    <TextBox x:Name="LogBox" Margin="0,0" TextWrapping="Wrap" UseLayoutRounding="False"
+                             ToolTip="Broadcast log." VerticalScrollBarVisibility="Visible" IsReadOnly="True"
+                             Width="638" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                    <ComboBox x:Name="SendInterfaceBox" Width="100" IsEnabled="False"
+                              SelectionChanged="SendInterfaceBox_OnSelectionChanged" VerticalContentAlignment="Center">
+                        <ComboBoxItem IsSelected="True">not processed yet</ComboBoxItem>
+                    </ComboBox>
+                    <Grid Margin="4,0,0,0">
+                        <TextBox x:Name="SenderNameBox" Height="30" TextWrapping="Wrap" Width="100" Margin="0,0,0,0"
+                                 VerticalAlignment="Top" VerticalContentAlignment="Center"
+                                 KeyDown="SenderNameBox_OnKeyDown" />
+                        <TextBlock IsHitTestVisible="False" Text="Name" VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SenderNameBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Margin="4,0,0,0">
+                        <TextBox x:Name="MessageBox" Height="30" TextWrapping="Wrap"
+                                 UseLayoutRounding="False" VerticalAlignment="Top" VerticalContentAlignment="Center"
+                                 ToolTip="Write text and push enter to send it to server." Width="337"
+                                 HorizontalAlignment="Left" KeyDown="MessageBox_OnKeyDown" />
+                        <TextBlock IsHitTestVisible="False" Text="Message" VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" Margin="11,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=MessageBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+                    <Button x:Name="SendButton" Content="Send" Margin="4,0,0,0" Width="90" Height="30"
+                            VerticalAlignment="Top" Click="SendButton_OnClick" />
+
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
